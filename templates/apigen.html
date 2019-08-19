@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Notifier</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script type="application/javascript">
+        $(function () {
+            let element = document.getElementById("testspinner");
+            $('#testtoken').click(function() {
+                document.getElementById("testspinner").classList.remove("invisible");
+                $.post('/testtoken', {
+                   token: $('input[name="token"]').val(),
+                   chatid: $('input[name="chatid"]').val(),
+                }, function(data) {
+                   {#document.getElementById("testspinner").classList.add("invisible");#}
+                   if (data.status == "OK") {
+                       $("#testtoken").removeClass("btn-danger").addClass("btn-primary").text("OK");
+                       $("#saverecord").removeClass("disabled");
+                   } else {
+                       $("#testspinner").addClass("invisible");
+                       $("#testtoken").removeClass("btn-primary").addClass("btn-danger");
+                       $("#testbuttontext").text(data.status);
+                   }
+                })
+                .fail(function() {
+
+
+
+                });
+            });
+
+            return false;
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item" class="active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apigen">New API Endpoint</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Telegram Notifier</h3>
+        </div>
+        <div class="jumbotron">
+            <h2>New API Endpoint</h2>
+            <form method="post">
+                <div class="form-row">
+                    <div class="col">
+                        <input name="name" type="text" class="form-control" placeholder="Name" required>
+                    </div>
+                    <div class="col">
+                        <input name="description" type="text" class="form-control" placeholder="Description" required>
+                    </div>
+                    <div class="col">
+                        <input name="token" type="text" class="form-control" placeholder="Telegram Token" required>
+                    </div>
+                    <div class="col">
+                        <input name="chatid" type="text" class="form-control" placeholder="Chat ID" required>
+                    </div>
+                    <button name="testtoken" id="testtoken" type="button" class="btn btn-primary btn-sm">
+                        <span id="testspinner" class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="true"></span>
+                        <span id="testbuttontext">Test</span>
+                    </button>
+                    <button id="saverecord" type="submit" class="btn btn-success btn-sm disabled">Save</button>
+                </div>
+            </form>
+            <div class="alert alert-warning fade show invisible">
+                <span id="alerttext">Error detected</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

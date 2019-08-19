@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Notifier</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item" class="active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apigen">New API Endpoint</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Telegram Notifier</h3>
+        </div>
+
+        <div class="jumbotron">
+            <h2>Delete Endpoint</h2>
+            <form action="/deleterecord" method="post">
+                <div class="form-group row">
+                    <input type="text" readonly class="form-control-plaintext" value="Confirm deletion of API Key: {{ apikey }}">
+                </div>
+                <div class="form-group row">
+                    <input type="hidden" name="apikey" value="{{ apikey }}">
+                    <input type="hidden" name="confirm" value="true">
+                    <button type="submit" id="deleterecord_button" class="btn btn-danger mb-2">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

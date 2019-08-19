@@ -1,0 +1,5 @@
+.idea
+data/telegramdb
+data/htpass
+config.yml
+venv
